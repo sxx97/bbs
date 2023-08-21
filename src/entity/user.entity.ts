@@ -32,10 +32,10 @@ export class User {
   @Column()
   wechatUnionId?: string = '';
 
-  @Column()
+  @Column({ select: false })
   password: string;
 
-  @Column({ type: 'tinyint', default: 1 })
+  @Column({ type: 'tinyint', default: 0, select: false })
   isDelete: 0 | 1 = 0;
 
   @Column()

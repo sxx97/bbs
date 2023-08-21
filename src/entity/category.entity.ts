@@ -17,7 +17,7 @@ export class Category {
   @Column({ length: 100 })
   name: string;
 
-  @Column({ type: 'tinyint', default: 1 })
+  @Column({ type: 'tinyint', default: 0, select: false })
   isDelete: 0 | 1 = 0;
 
   @OneToMany(() => Post, (post) => post.category)

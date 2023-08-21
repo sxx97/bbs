@@ -8,5 +8,4 @@ export class TokenService {
   signJwt(payload) {
     return this.jwtService.sign(payload);
   }
-	
 }

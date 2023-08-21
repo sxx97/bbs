@@ -5,6 +5,7 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as ormConfig from '../ormconfig.json';
 import { AuthModule } from './modules/auth/auth.module';
 import { CategoryModule } from './modules/postCategory/category.module';
+import { PostModule } from './modules/post/post.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { CategoryModule } from './modules/postCategory/category.module';
     }),
     AuthModule,
     CategoryModule,
+    PostModule,
   ],
   controllers: [AppController],
   providers: [AppService],

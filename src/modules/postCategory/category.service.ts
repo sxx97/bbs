@@ -32,6 +32,16 @@ export class CategoryService {
     return { message: '修改成功' };
   }
 
+  async queryCategorys(page: number = 1, size: number = 10) {
+    return await this.categoryRepository.find({
+      skip: (page - 1) * size,
+      take: size,
+      order: {
+        id: 'DESC', // or "ASC" for ascending order
+      },
+    });
+  }
+
   async deleteCategory(id: number) {
     const hasCategory = await this.categoryRepository.findOneBy({ id });
     if (!hasCategory) {

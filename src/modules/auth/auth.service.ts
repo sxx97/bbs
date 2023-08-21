@@ -15,7 +15,7 @@ export class AuthService {
   ) {}
 
   async generateToken(user: User) {
-    const payload = { username: user.account, sub: user.id };
+    const payload = { username: user.account, userId: user.id };
     return this.tokenService.signJwt(payload);
   }
 
@@ -28,8 +28,12 @@ export class AuthService {
   async login(account: string, password: string): Promise<TokenResponse> {
     const response: TokenResponse = { accessToken: '', refreshToken: '' };
 
-    const findUser = await this.usersRepository.findOneBy({
-      account,
+    const findUser = await this.usersRepository.findOne({
+      where: {
+        account,
+        isDelete: 0,
+      },
+      select: ['password'],
     });
     if (findUser) {
       const isMatch = await bcrypt.compare(password, findUser.password);

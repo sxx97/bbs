@@ -5,6 +5,8 @@ import {
   Post,
   UseGuards,
   Delete,
+  Get,
+  Query,
 } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -13,6 +15,12 @@ import { CategoryDto } from './category.dto';
 @Controller('category')
 export class CategoryController {
   constructor(private categoryService: CategoryService) {}
+
+  @Get('list')
+  @UseGuards(JwtAuthGuard)
+  queryCategoryList(@Query() page: number, @Query() count: number) {
+    return this.categoryService.queryCategorys(page, count);
+  }
 
   @Post('add')
   @UseGuards(JwtAuthGuard)

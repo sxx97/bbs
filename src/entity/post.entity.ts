@@ -31,7 +31,7 @@ export class Post {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @Column({ type: 'tinyint', default: 1 })
+  @Column({ type: 'tinyint', default: 0, select: false })
   isDelete: 0 | 1 = 0;
 
   @ManyToOne(() => User, (user) => user.posts)
