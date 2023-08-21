@@ -35,6 +35,27 @@ export class CommentService {
     return { message: '添加成功' };
   }
 
+  async queryCommentsByPost(
+    postId: number,
+    page: number = 1,
+    size: number = 10,
+  ) {
+    const post = await this.postRepository.findOneBy({ id: postId });
+    if (!post) {
+      return { message: '未查询到帖子', code: 0 };
+    }
+    return await this.commentRepository.find({
+      where: {
+        post,
+      },
+      skip: (page - 1) * size,
+      take: size,
+      order: {
+        created_at: 'DESC', // or "ASC" for ascending order
+      },
+    });
+  }
+
   async queryCommentsByUser(
     userId: number,
     page: number = 1,
@@ -42,7 +63,7 @@ export class CommentService {
   ) {
     const user = await this.userRepository.findOneBy({ id: userId });
     if (!user) {
-      return { message: '未查询到帖子', code: 0 };
+      return { message: '未查询到评论', code: 0 };
     }
     return await this.commentRepository.find({
       where: {

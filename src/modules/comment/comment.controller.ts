@@ -23,6 +23,20 @@ export class CommentController {
     return this.commentService.queryComments(page, count);
   }
 
+  @Get('list/post/:id')
+  @UseGuards(JwtAuthGuard)
+  queryCommentListByPost(
+    @Param() id: string,
+    @Query() page: number,
+    @Query() count: number,
+  ) {
+    return this.commentService.queryCommentsByPost(
+      id ? Number(0) : 0,
+      page,
+      count,
+    );
+  }
+
   @Get('list/self')
   @UseGuards(JwtAuthGuard)
   queryCommentListByUser(
