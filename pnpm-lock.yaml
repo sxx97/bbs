@@ -68,6 +68,9 @@ dependencies:
   typeorm:
     specifier: ^0.3.17
     version: registry.npmmirror.com/typeorm@0.3.17(mysql2@3.6.0)(ts-node@10.9.1)
+  ws:
+    specifier: ^8.13.0
+    version: registry.npmmirror.com/ws@8.13.0
 
 devDependencies:
   '@nestjs/cli':
@@ -7853,6 +7856,21 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
+
+  registry.npmmirror.com/ws@8.13.0:
+    resolution: {integrity: sha512-x9vcZYTrFPC7aSIbj7sRCYo7L/Xb8Iy+pW0ng0wt2vCJv7M9HOMy0UoN3rr+IFC7hb7vXoqS+P9ktyLLLhO+LA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ws/-/ws-8.13.0.tgz}
+    name: ws
+    version: 8.13.0
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+    dev: false
 
   registry.npmmirror.com/xtend@4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/xtend/-/xtend-4.0.2.tgz}

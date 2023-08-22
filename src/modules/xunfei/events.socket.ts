@@ -5,6 +5,7 @@ import {
   WebSocketServer,
   OnGatewayConnection,
   OnGatewayDisconnect,
+  MessageBody,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import dayjs from 'dayjs';
@@ -13,7 +14,8 @@ import { Logger } from '@nestjs/common';
 
 @WebSocketGateway(8888, {
   namespace: 'xunfei',
-  transports: ['websocket'],
+  path: '/socket',
+  transports: ['websocket', 'polling'],
   cors: {
     origin: '*',
   },
@@ -40,9 +42,9 @@ export class EventsXunfeiSocket
   }
 
   @SubscribeMessage('message')
-  handleMessage(client: Socket, text: string): void {
-    this.logger.log(`message: ${client.id}`, `text: ${text}`);
-    client.emit('msgToClient', text);
+  handleMessage(@MessageBody() data: any, client: Socket, text: string): void {
+    this.logger.log(`data: ${data}, message: ${client.id}`, `text: ${text}`);
+    client.send(JSON.stringify({ event: 'tmp', data: '测试' }));
   }
 
   initXunfei(
