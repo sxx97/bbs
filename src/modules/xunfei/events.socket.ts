@@ -9,9 +9,11 @@ import {
 import { Server, Socket } from 'socket.io';
 import dayjs from 'dayjs';
 import crypto from 'crypto';
+import { Logger } from '@nestjs/common';
 
 @WebSocketGateway(8888, {
   namespace: 'xunfei',
+  transports: ['websocket'],
   cors: {
     origin: '*',
   },
@@ -19,24 +21,27 @@ import crypto from 'crypto';
 export class EventsXunfeiSocket
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {
+  private logger: Logger = new Logger('EventsXunfeiSocket');
+
   @WebSocketServer()
   server: Server;
 
   afterInit(server: Server) {
-    console.log('Initialized!');
+    this.logger.log(`afterInit: ${server}`);
   }
 
   handleConnection(client: Socket, ...args: any[]) {
-    console.log('client connected');
-    this.initXunfei('spark-api.xf-yun.com', new Date());
+    this.logger.log(`Client connected: ${client.id}`, args);
+    //    this.initXunfei('spark-api.xf-yun.com', new Date());
   }
 
   handleDisconnect(client: Socket) {
-    console.log('client disconnected');
+    this.logger.log(`Client disconnected: ${client.id}`);
   }
 
   @SubscribeMessage('message')
   handleMessage(client: Socket, text: string): void {
+    this.logger.log(`message: ${client.id}`, `text: ${text}`);
     client.emit('msgToClient', text);
   }
 
@@ -46,11 +51,10 @@ export class EventsXunfeiSocket
     APIKey = '3a71de5715db8afa59df17708c2b6875',
     APISecret = 'MDZjNTJiZjA5NmFjNWJhZDk0MDMwYjI5',
   ) {
-    const dateStr = dayjs(date, 'ddd, DD MMM YYYY HH:mm:ss GMT');
+    const dateStr = dayjs(date).format('ddd, DD MMM YYYY HH:mm:ss GMT');
     const tmp = `host: ${host}
-		date: ${dateStr}
-		GET/v2.1/chat HTTP/1.1												
-		`;
+date: ${dateStr}
+GET /v2.1/chat HTTP/1.1`;
 
     const hmac = crypto.createHmac('sha256', APISecret);
     hmac.update(tmp);

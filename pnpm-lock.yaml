@@ -88,6 +88,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.3.1
     version: registry.npmmirror.com/@types/node@20.3.1
+  '@types/socket.io':
+    specifier: ^3.0.2
+    version: registry.npmmirror.com/@types/socket.io@3.0.2
   '@types/supertest':
     specifier: ^2.0.12
     version: registry.npmmirror.com/@types/supertest@2.0.12
@@ -1759,6 +1762,19 @@ packages:
       '@types/http-errors': registry.npmmirror.com/@types/http-errors@2.0.1
       '@types/mime': registry.npmmirror.com/@types/mime@3.0.1
       '@types/node': registry.npmmirror.com/@types/node@20.3.1
+    dev: true
+
+  registry.npmmirror.com/@types/socket.io@3.0.2:
+    resolution: {integrity: sha512-pu0sN9m5VjCxBZVK8hW37ZcMe8rjn4HHggBN5CbaRTvFwv5jOmuIRZEuddsBPa9Th0ts0SIo3Niukq+95cMBbQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/socket.io/-/socket.io-3.0.2.tgz}
+    name: '@types/socket.io'
+    version: 3.0.2
+    deprecated: This is a stub types definition. socket.io provides its own type definitions, so you do not need this installed.
+    dependencies:
+      socket.io: registry.npmmirror.com/socket.io@4.7.2
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
     dev: true
 
   registry.npmmirror.com/@types/stack-utils@2.0.1:
@@ -6835,7 +6851,6 @@ packages:
       - bufferutil
       - supports-color
       - utf-8-validate
-    dev: false
 
   registry.npmmirror.com/sonic-boom@3.3.0:
     resolution: {integrity: sha512-LYxp34KlZ1a2Jb8ZQgFCK3niIHzibdwtwNUWKg0qQRzsDoJ3Gfgkf8KdBTFU3SkejDEIlWwnSnpVdOZIhFMl/g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/sonic-boom/-/sonic-boom-3.3.0.tgz}

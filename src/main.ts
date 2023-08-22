@@ -8,7 +8,9 @@ import { ValidationPipe } from '@nestjs/common';
 import { ResponseInterceptor } from './common/responseInterceptor';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(AppModule);
+  const app = await NestFactory.create<NestFastifyApplication>(AppModule, {
+    logger: ['error', 'warn', 'log', 'debug', 'verbose'],
+  });
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalInterceptors(new ResponseInterceptor());
   await app.listen(3000);
