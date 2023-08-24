@@ -8,7 +8,7 @@ import { CategoryModule } from './modules/postCategory/category.module';
 import { PostModule } from './modules/post/post.module';
 import { CommentModule } from './modules/comment/comment.module';
 //import { XunfeiWebSocketModule } from './modules/xunfei/xunfei.module';
-import { EventsXunfeiSocket } from './modules/xunfei/events.socket';
+import { XunfeiSocketGateway } from './modules/xunfei/xunfeiSocket.gateway';
 
 @Module({
   imports: [
@@ -22,6 +22,6 @@ import { EventsXunfeiSocket } from './modules/xunfei/events.socket';
     //    XunfeiWebSocketModule,
   ],
   controllers: [AppController],
-  providers: [AppService, EventsXunfeiSocket],
+  providers: [AppService, XunfeiSocketGateway],
 })
 export class AppModule {}

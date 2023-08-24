@@ -6,6 +6,7 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
   MessageBody,
+  ConnectedSocket,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import dayjs from 'dayjs';
@@ -19,8 +20,14 @@ import { Logger } from '@nestjs/common';
   cors: {
     origin: '*',
   },
+  allowRequest: (req, callback) => {
+    console.log('请求查看', req);
+    setTimeout(() => {
+      callback(null, true);
+    }, 5000);
+  },
 })
-export class EventsXunfeiSocket
+export class XunfeiSocketGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {
   private logger: Logger = new Logger('EventsXunfeiSocket');
@@ -42,8 +49,11 @@ export class EventsXunfeiSocket
   }
 
   @SubscribeMessage('message')
-  handleMessage(@MessageBody() data: any, client: Socket, text: string): void {
-    this.logger.log(`data: ${data}, message: ${client.id}`, `text: ${text}`);
+  handleMessage(
+    @MessageBody() data: any,
+    @ConnectedSocket() client: Socket,
+  ): void {
+    this.logger.log(`data: ${data}, message: ${client.id}`);
     client.send(JSON.stringify({ event: 'tmp', data: '测试' }));
   }
 
