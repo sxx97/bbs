@@ -9,6 +9,9 @@ export class PostDto {
   @IsNotEmpty()
   content: string;
 
+  @IsString()
+  encryptContent?: string;
+
   @IsInt()
   categoryId?: number;
 }

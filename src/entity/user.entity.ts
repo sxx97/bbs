@@ -24,6 +24,9 @@ export class User {
   email?: string = '';
 
   @Column()
+  wechatAccount?: string = '';
+
+  @Column()
   phone?: string = '';
 
   @Column()

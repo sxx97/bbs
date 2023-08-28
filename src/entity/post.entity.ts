@@ -22,6 +22,9 @@ export class Post {
   @Column({ length: 500 })
   title: string;
 
+  @Column()
+  encryptContent?: string;
+
   @Column('text')
   content: string;
 
